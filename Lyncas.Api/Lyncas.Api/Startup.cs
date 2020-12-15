@@ -44,6 +44,13 @@ namespace Lyncas.Api
             {
                 endpoints.MapControllers();
             });
+
+            //aplica as migrações para criar o banco sempre que ele não existir
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<PessoaContext>();
+                context.Database.Migrate();
+            }
         }
     }
 }
