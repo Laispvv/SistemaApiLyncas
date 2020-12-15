@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SistemaApiLyncas.Controllers
+namespace Lyncas.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

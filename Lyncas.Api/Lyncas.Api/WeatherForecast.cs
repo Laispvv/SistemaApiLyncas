@@ -1,6 +1,6 @@
 using System;
 
-namespace SistemaApiLyncas
+namespace Lyncas.Api
 {
     public class WeatherForecast
     {
