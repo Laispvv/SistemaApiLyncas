@@ -17,5 +17,6 @@ namespace Lyncas.Api.Models
         public string Ocupacao { get; set; }
         [Required]
         public string Status { get; set; }
+        public string Senha { get; set; }
     }
 }
