@@ -11,5 +11,12 @@ namespace Lyncas.Api.Models
         public int Id { get; set; }
         [Required]
         public string Nome { get; set; }
+        [Required]
+        public string DataCriada { get; set; }
+        [Required]
+        public string Ocupacao { get; set; }
+        [Required]
+        public string Status { get; set; }
+        public string Senha { get; set; }
     }
 }

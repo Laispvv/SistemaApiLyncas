@@ -1,0 +1,168 @@
+﻿body {
+    background-color: #22bee6;
+    /* background-image: url("https://images.pexels.com/photos/112141/pexels-photo-112141.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); */
+    background-size: default;
+    background-repeat: no-repeat;
+    overflow-y: hidden;
+    font-family: 'PT Sans', sans-serif;
+    /* font-size: 20px; */
+    min-width: 1400px;
+}
+
+.normalText, span {
+    font-family: 'PT Sans', sans-serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+    /* margin-top: 0px; */
+}
+
+#form {
+    background-color: rgba(255, 255, 255, 0.850);
+    position: relative;
+    width: 30%;
+    height: 50%;
+    margin-top: 120px;
+    margin-bottom: 120px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+#title {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 300;
+    font-size: 4em;
+    padding: 2px;
+    color: #160c41;
+    font-weight: bold;
+}
+
+#textField {
+    padding: 2px;
+    background-color: rgba(255, 255, 255, 0.90);
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 1em;
+    height: 65%;
+    width: 90%;
+    border-radius: 4px;
+}
+
+#passwordInput {
+    /* imagem de textField */
+    background-image: url("https://raw.githubusercontent.com/stephenhutchings/typicons.font/master/src/png-24px/lock-closed.png");
+    background-position: 10px 10px;
+    opacity: 0.6;
+    background-size: inherit;
+    padding: 12px 35px 12px 40px;
+    background-repeat: no-repeat;
+}
+
+#emailInput {
+    /* imagem de textField */
+    background-image: url("https://raw.githubusercontent.com/stephenhutchings/typicons.font/master/src/png-24px/mail.png");
+    background-position: 10px 10px;
+    opacity: 0.6;
+    background-size: inherit;
+    padding: 12px 20px 12px 40px;
+    background-repeat: no-repeat;
+    margin-top: 30px;
+}
+
+input[type=email], input[type=password], input[type=text] {
+    /* características da fonte */
+    font-family: 'PT Sans', sans-serif;
+    font-size: 20px;
+    /* caracteristicas do formato da caixa */
+    width: 85%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    background-color: white;
+    color: black;
+}
+
+#loginButton {
+    background-color: #22bee6;
+    border: none;
+    padding: 16px 32px;
+    margin: 15px 0 20px 0;
+    color: white;
+    width: 85%;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 20px;
+    /* faz o cursos virar uma mãozinha quando passa por cima do botão */
+    cursor: pointer;
+}
+
+.socialButton {
+    background-color: white;
+    border: 1px solid rgb(238, 238, 238);
+    padding: 16px 32px;
+    width: 45%;
+    /* font-family: 'Antic Slab', monospace; */
+    text-align: center;
+    /* faz o cursos virar uma mãozinha quando passa por cima do botão */
+    cursor: pointer;
+    font-family: 'PT Sans', sans-serif;
+}
+
+#socialButtonFacebook {
+    margin: 5px 1px 10px 15px;
+    background-image: url("https://icons.iconarchive.com/icons/danleech/simple/24/facebook-icon.png");
+    background-position: 23px 12px;
+    background-repeat: no-repeat;
+    color: #4a6ea9;
+    font-size: 18px;
+    font-weight: bold;
+    float: left;
+}
+
+#socialButtonGoogle {
+    margin: 5px 15px 10px 1px;
+    background-image: url("https://icons.iconarchive.com/icons/papirus-team/papirus-apps/32/google-icon.png");
+    background-position: 23px 10px;
+    background-repeat: no-repeat;
+    color: #575757;
+    font-size: 18px;
+    font-weight: bold;
+    float: right;
+}
+
+#nonMemberText {
+    /* margin-bottom: 300%; */
+    margin-top: 10em;
+}
+
+#checkboxDiv {
+    text-align: left;
+    margin-bottom: 10px;
+    /* padding: 10px 0px 10px 25px; */
+    margin-left: 7%;
+}
+
+#acessDenied {
+    color: red;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    font-size: 16px;
+}
+
+#buttonEye {
+    position: absolute;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    right: 10%;
+}
+
+a, a:active {
+    color: gray;
+}

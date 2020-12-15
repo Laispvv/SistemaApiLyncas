@@ -1,12 +1,14 @@
-using Lyncas.Api.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Lyncas.Api
+namespace Lyncas.WebApp
 {
     public class Startup
     {
@@ -20,12 +22,12 @@ namespace Lyncas.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PessoaContext>(opt => 
-            {
-                opt.UseSqlServer(Configuration.GetConnectionString("ApiLyncas"));
-            });
+            services.AddControllersWithViews();
 
-            services.AddControllers();
+            services.AddHttpClient<PessoaApiClient>(client =>
+            {
+                client.BaseAddress = new Uri("http://localhost:5000/api/");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +37,11 @@ namespace Lyncas.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
+            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -42,15 +49,10 @@ namespace Lyncas.Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            //aplica as migrações para criar o banco sempre que ele não existir
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetRequiredService<PessoaContext>();
-                context.Database.Migrate();
-            }
         }
     }
 }
