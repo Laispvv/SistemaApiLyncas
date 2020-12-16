@@ -17,6 +17,15 @@ namespace Lyncas.Api.Models
         public string Ocupacao { get; set; }
         [Required]
         public string Status { get; set; }
+        [Required]
+        public string Imagem { get; set; }
         public string Senha { get; set; }
+
+        public string GetColorStatusCode()
+        {
+            if (Status == "Disponível") return "#6ed659";
+            else if (Status == "Ausente") return "#d6d459";
+            else return "#dd405a";
+        }
     }
 }

@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Lyncas.Api.Models.Pessoa
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +12,6 @@
     <!-- JavaScript e icones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="dashboard.js"></script>
 </head>
 
 <body>
@@ -35,7 +30,7 @@
     <!-- main -->
     <div id="anchorBody">
         <table class="table">
-            <thead>
+            <thead class="thead">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
@@ -46,9 +41,31 @@
                 </tr>
             </thead>
             <tbody id="tableBody">
-                <tr>
-                    <!-- tr vazio pois o js vai adicionar os itens da tabela -->
-                </tr>
+                @{ foreach (var p in ViewBag.listaPessoas)
+                    {
+                        <tr>
+                            <th>@p.Id</th>
+                            <th>
+                                <img src="@p.Imagem" alt="@p.Nome" />
+                                @p.Nome
+                            </th>
+                            <th>@p.DataCriada</th>
+                            <th>@p.Ocupacao</th>
+                            <th>
+                                <i class="fa fa-circle" aria-hidden="true" id="statusIcon" style="font-size: 12px;color: @p.GetColorStatusCode();"></i>
+                                @p.Status
+                            </th>
+                            <th>
+                                <button id="@p.Id" onClick=onCogButtonClick() class="cogIcon @p.Id" >
+                                    <i class="fa fa-cog @p.Id" aria-hidden="true" style="color:#22bee6;"></i>
+                                </button>
+                                <button id="@p.Id" onClick=onCancelButtonClick() class="cancelIcon @p.Id">
+                                    <i id="@p.Id" class="fa fa-times-circle @p.Id" aria-hidden="true" style="color:#dd405a;"></i>
+                                </button>
+                            </th>
+                        </tr>
+                    }
+                }
             </tbody>
         </table>
         <!-- parte que mostra as páginas -->
@@ -64,5 +81,13 @@
         </div>
     </div>
 </body>
-
 </html>
+<script>
+    function onCogButtonClick() {
+        console.log("opa");
+    }
+
+    function onCancelButtonClick() {
+        console.log("hello");
+    }
+</script>

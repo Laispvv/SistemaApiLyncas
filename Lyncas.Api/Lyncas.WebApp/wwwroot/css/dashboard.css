@@ -26,36 +26,36 @@
 }
 
 
-    #anchorHeader p {
-        font-family: 'Ubuntu', sans-serif;
-        font-weight: 300;
-        font-size: 2.5em;
-        color: white;
-        float: left;
-        margin-left: 40px;
-    }
+#anchorHeader p {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 300;
+    font-size: 2.5em;
+    color: white;
+    float: left;
+    margin-left: 40px;
+}
 
-    #anchorHeader button {
-        position: relative;
-        float: right;
-        /* estilo */
-        margin-top: 2.5em;
-        background-color: white;
-        border: 0;
-        border-radius: 3px;
-        padding: 0.6em;
-        margin-right: 1em;
-        font-size: 1em;
-        font-family: 'PT Sans', sans-serif;
-        color: rgb(68, 68, 68);
-        cursor: pointer;
-    }
+#anchorHeader button {
+    position: relative;
+    float: right;
+    /* estilo */
+    margin-top: 2.5em;
+    background-color: white;
+    border: 0;
+    border-radius: 3px;
+    padding: 0.6em;
+    margin-right: 1em;
+    font-size: 1em;
+    font-family: 'PT Sans', sans-serif;
+    color: rgb(68, 68, 68);
+    cursor: pointer;
+}
 
 
-        #anchorHeader button i {
-            margin-right: 15px;
-            font-size: 1.4em;
-        }
+#anchorHeader button i {
+    margin-right: 15px;
+    font-size: 1.4em;
+}
 
 #anchorBody {
     font-weight: 300;
@@ -78,34 +78,39 @@
     table-layout: auto;
 }
 
-    .table th {
-        font-weight: 700;
-        padding: 0.7em;
-        border-bottom: 2px solid rgb(204, 202, 202);
-        text-align: left;
-        padding-left: 2.4em;
-    }
 
-    .table td {
-        /* margin: 2em; */
-        border-bottom: 1px solid rgb(204, 202, 202);
-        text-align: left;
-        padding: 0.80em;
-        padding-left: 2.3em;
-    }
+.table th {
+    font-weight: 300;
+    padding: 0.7em;
+    border-bottom: 2px solid rgb(204, 202, 202);
+    text-align: left;
+    padding-left: 2.4em;
+}
 
-        .table td img {
-            border-radius: 50%;
-            width: 20%;
-            max-width: 80px;
-            /* coloca o texto no meio */
-            vertical-align: middle;
-        }
+.thead th{
+    font-weight: 700;
+}
 
-        .table td span {
-            padding: 1.5em;
-            /* padding-left: 0.2em; */
-        }
+.table td {
+    /* margin: 2em; */
+    border-bottom: 1px solid rgb(204, 202, 202);
+    text-align: left;
+    padding: 0.80em;
+    padding-left: 2.3em;
+}
+
+.table td img {
+    border-radius: 50%;
+    width: 20%;
+    max-width: 80px;
+    /* coloca o texto no meio */
+    vertical-align: middle;
+}
+
+.table td span {
+    padding: 1.5em;
+    /* padding-left: 0.2em; */
+}
 
 #statusIcon {
     margin-right: 0.5em;
@@ -125,22 +130,22 @@
     padding-top: 2em;
 }
 
-    #pageCounter button {
-        font-size: 1em;
-        color: rgb(68, 68, 68);
-        background-color: white;
-        margin: 1px;
-        padding-top: 3px;
-        padding-bottom: 2px;
-        border: 0;
-        border-radius: 2px;
-        text-align: center;
-        float: right;
-        text-align: center;
-        cursor: pointer;
-        font-family: 'PT Sans', sans-serif;
-    }
+#pageCounter button {
+    font-size: 1em;
+    color: rgb(68, 68, 68);
+    background-color: white;
+    margin: 1px;
+    padding-top: 3px;
+    padding-bottom: 2px;
+    border: 0;
+    border-radius: 2px;
+    text-align: center;
+    float: right;
+    text-align: center;
+    cursor: pointer;
+    font-family: 'PT Sans', sans-serif;
+}
 
-    #pageCounter p {
-        float: left;
-    }
+#pageCounter p {
+    float: left;
+}
