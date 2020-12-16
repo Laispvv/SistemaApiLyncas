@@ -26,7 +26,7 @@ namespace Lyncas.WebApp
 
             services.AddHttpClient<PessoaApiClient>(client =>
             {
-                client.BaseAddress = new Uri("http://localhost:5000/api/");
+                client.BaseAddress = new Uri("http://localhost:6000/api/");
             });
         }
 
