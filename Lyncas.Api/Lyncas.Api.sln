@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lyncas.Api", "Lyncas.Api\Lyncas.Api.csproj", "{DF5C3A4F-07CC-4A4A-B573-F2465DC98376}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyncas.WebApp", "Lyncas.WebApp\Lyncas.WebApp.csproj", "{FB3EB1D6-43E8-4FFF-B600-1CD1F665CA74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LyncasApi", "LyncasApi\LyncasApi.csproj", "{14480B69-AE5F-4C1B-8417-0FAD361C46DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{DF5C3A4F-07CC-4A4A-B573-F2465DC98376}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF5C3A4F-07CC-4A4A-B573-F2465DC98376}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF5C3A4F-07CC-4A4A-B573-F2465DC98376}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB3EB1D6-43E8-4FFF-B600-1CD1F665CA74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB3EB1D6-43E8-4FFF-B600-1CD1F665CA74}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB3EB1D6-43E8-4FFF-B600-1CD1F665CA74}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB3EB1D6-43E8-4FFF-B600-1CD1F665CA74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14480B69-AE5F-4C1B-8417-0FAD361C46DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14480B69-AE5F-4C1B-8417-0FAD361C46DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14480B69-AE5F-4C1B-8417-0FAD361C46DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14480B69-AE5F-4C1B-8417-0FAD361C46DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
