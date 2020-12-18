@@ -115,7 +115,24 @@
     }
 
     var onExportToExcelClick = function(){
-        console.log("export to excel");
+        //pega as pessoas por ajax
+        var stringPessoas = "";
+        $.ajax({
+            url: baseUrl,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                data.forEach(p => {
+                    stringPessoas+= `${p.nome};${p.dataCriada};${p.ocupacao};${p.status}\n`
+                });
+                download("pessoas.txt", stringPessoas);
+            },
+            error: function (err) {
+                console.log('error ' + err);
+                alert("houve um problema.");
+            }
+        });
     }
 
     function onLogoutClick(){
