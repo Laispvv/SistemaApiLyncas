@@ -59,31 +59,26 @@ var verifyAutentication = function(){
 }
 
 var preencheDashboardPorApi = function(){
-    var listaPessoas = [];
-
-    var get = $.ajax({
+    $.ajax({
         url: baseUrl,
         method: "GET",
         dataType: "json",
         contentType: "application/json",
         success: function (data) {
             listaPessoas = data;
-            data.forEach(element => {
-                // console.log(element);
-                var html = "<tr>";
-                data.forEach(p => {
-                    //     //função que adiciona a pessoa na tela
-                    html += createItemForObject(p);
-                });
-
-                html += "</tr>";
-
-                $("#tableBody").html(html);    
+            var html = "<tr>";
+            data.forEach(p => {
+                //função que adiciona a pessoa na tela
+                html += createItemForObject(p);
             });
+
+            html += "</tr>";
+
+            $("#tableBody").html(html);    
         },
         error: function (err) {
             console.log('error ' + err);
-            return ""
+            return "";
         }
     });
 }

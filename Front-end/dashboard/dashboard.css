@@ -1,9 +1,15 @@
 body{
     background-color: white;
-    /* overflow-y: hidden; */
+    overflow-y: hidden;
     font-size: medium;
     font-family: 'PT Sans', sans-serif;
     min-width: 860px;
+}
+
+@media (max-width: 1170px){
+    body{
+        overflow-y: auto;
+    }
 }
 
 .boldWords{
