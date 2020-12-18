@@ -1,9 +1,16 @@
 body{
     background-color: white;
-    /* overflow-y: hidden; */
+    overflow-y: hidden;
     font-size: medium;
     font-family: 'PT Sans', sans-serif;
-    min-width: 860px;
+    min-width: 1130px;
+}
+
+@media (max-width: 1170px){
+    body{
+        overflow-y: auto;
+        overflow-x:auto;
+    }
 }
 
 .boldWords{
@@ -33,6 +40,15 @@ body{
     color: white;
     float: left;
     margin-left: 40px;
+}
+
+#anchorHeader #NomeDoUsuario{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 300;
+    font-size: 1.5em;
+    color: white;
+    margin-left: 10px;
+    margin-top: 50px;
 }
 
 #anchorHeader button{

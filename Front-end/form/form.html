@@ -279,7 +279,7 @@
            <footer>
                 <div>
                     <button type="button" id="saveChanges" 
-                    style="background-color: #e84c3d;color:white"
+                    style="background-color: #22bee6;color:white"
                     onclick="saveChanges()">
                         Save Changes
                     </button>
@@ -353,7 +353,7 @@
                 Status: status,
                 Imagem: image
             };
-            if(password == ""){
+            if(password != ""){
                 let a = { Senha: password };
                 //junta obj a com obj dataApi
                 Object.assign(dataApi, a);

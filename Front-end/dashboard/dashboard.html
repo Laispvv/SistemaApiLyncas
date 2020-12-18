@@ -18,6 +18,8 @@
         <!-- header -->
         <div id="anchorHeader">
             <p>User <span class="boldWords">Management</span></p>
+            <div style="border-left:2px solid rgba(255, 255, 255, 0.705);height:110px; float: left;margin: 10px 0px 10px 20px;"></div>
+            <p id="NomeDoUsuario"></p>
             <!-- perguntar sobre o path do arquivo -> se não estiver com a pasta treinamento aberto não funciona :( -->
             <button id="addNewUser" onclick=onAddNewUserClick()> 
                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
@@ -27,6 +29,10 @@
                 <i class="fa fa-file" aria-hidden="true"></i>
                 Export to Excel
             </button>        
+            <button id="logout" onclick=onLogoutClick()>
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                Logout
+            </button>  
         </div>
         <!-- main -->
         <div id="anchorBody">
@@ -50,58 +56,124 @@
             <!-- parte que mostra as páginas -->
             <div id="pageCounter">
                 <p></p>Showing <span class="boldWords" id="currentEntrie"></span> out of <span class="boldWords" id="totalAmount"></span> entries</p>
-                <button> Next </button>
-                <button id="5button"> <span>5</span> </button>
-                <button id="4button"> <span>4</span> </button>
-                <button id="3button"> <span>3</span> </button>
-                <button id="2button"> <span>2</span> </button>
-                <button id="1button"> <span>1</span> </button>
-                <button> Previous </button>
+                <button onclick=onNextClick()> Next </button>
+                <button class="5" id="4button"> <span id="4span"></span> </button>
+                <button class="4" id="3button"> <span id="3span"></span> </button>
+                <button class="3" id="2button"> <span id="2span"></span> </button>
+                <button class="2" id="1button"> <span id="1span"></span> </button>
+                <button class="1" id="0button"> <span id="0span"></span> </button>
+                <button onclick=onPreviousClick()> Previous </button>
             </div>
         </div>
     </body>
-
-    <script>
-        var onCancelButtonClick = function(botao){
-            if(verifyAutentication()){
-                $.ajax({
-                    url: baseUrl + botao.id,
-                    method: "DELETE",
-                    dataType: "json",
-                    success: function(){
-                        console.log("deletado");
-                        window.location.reload();
-                    }
-                });
-            }
-        }
-        
-        var onCogButtonClick = function(botao){
-            if (verifyAutentication()) {
-                window.location.href = '/form/form.html?id=' + botao.id;
-            }
-        }
-
-        var onAddNewUserClick = function(){
-            // verifyAutentication para poder adicionar novos usuários
-            if(verifyAutentication()){
-                window.location.href = '/form/form.html';
-            }
-        }
-
-        var onExportToExcelClick = function(){
-            console.log("export to excel");
-        }
-
-        //ajeitando parte de paginação
-        //pinta o botão da página atual de azul
-        var buttonPage = document.getElementById(currentPage + "button");
-        buttonPage.style = "color: white;background-color: #22bee6;";
-
-        //mostra a quantidade certa de entries e showing baseado nas variáveis no dashboard.js
-        var currentEntrieVar = $("#currentEntrie");
-        currentEntrieVar.html(currentEntrie);
-        var totalAmountVar = $("#totalAmount");
-        totalAmountVar.html(entriesAmount);
-    </script>
 </html>
+
+<script>
+    $("#NomeDoUsuario").html("Olá, " + sessionStorage.getItem("autentication"))
+    var onCancelButtonClick = function(botao){
+        if(verifyAutentication()){
+            $.ajax({
+                url: baseUrl + botao.id,
+                method: "DELETE",
+                dataType: "json",
+                success: function(){
+                    console.log("deletado");
+                    window.location.reload();
+                }
+            });
+        }
+    }
+
+    //preenche os botões de paginação
+    if (sessionStorage.getItem("paginacao")) {
+        var paginacao = sessionStorage.getItem("paginacao").split("-");
+        $("#0span").text(paginacao[0]);
+        $("#1span").text(paginacao[1]);
+        $("#2span").text(paginacao[2]);
+        $("#3span").text(paginacao[3]);
+        $("#4span").text(paginacao[4]);
+    }else{
+        sessionStorage.setItem("paginacao", "1-2-3-4-5");
+        $("#0span").text('1');
+        $("#1span").text('2');
+        $("#2span").text('3');
+        $("#3span").text('4');
+        $("#4span").text('5');
+    }
+    
+    var onCogButtonClick = function(botao){
+        if (verifyAutentication()) {
+            window.location.href = '/form/form.html?id=' + botao.id;
+        }
+    }
+
+    var onAddNewUserClick = function(){
+        // verifyAutentication para poder adicionar novos usuários
+        if(verifyAutentication()){
+            window.location.href = '/form/form.html';
+        }
+    }
+
+    var onExportToExcelClick = function(){
+        console.log("export to excel");
+    }
+
+    function onLogoutClick(){
+        localStorage.removeItem("autentication");
+        sessionStorage.removeItem("autentication");
+        window.location.href = '/login/login.html';
+    }
+
+    
+
+    //mostra a quantidade certa de entries e showing baseado nas variáveis no dashboard.js
+    var currentEntrieVar = $("#currentEntrie");
+    currentEntrieVar.html(currentEntrie);
+    var totalAmountVar = $("#totalAmount");
+    totalAmountVar.html(sessionStorage.getItem("totalAmount"));
+
+    function updateSession(num) {
+        var atual = Number(sessionStorage.getItem("currentPage"));
+        atual += num;
+        if(atual >= 0) sessionStorage.setItem("currentPage", atual);
+    }
+
+    function onNextClick() {
+        updateSession(1);
+
+        var current = Number(sessionStorage.getItem("currentPage"));
+
+        $(current + "button").css("background-color", "white");
+        
+        var current = Number(sessionStorage.getItem("currentPage"));
+        //atualizar os numeros apenas se a pagina atual for >= 5
+        if(current%5 == 0 && current >= 5){
+            var novaPaginacao = "";
+            for(var i = current+1; i <= current+5; i++){
+                novaPaginacao += i + "-";
+            }
+            sessionStorage.setItem("paginacao", novaPaginacao);
+        }
+        // debugger;
+        window.location.reload(false);
+    }
+    
+    function onPreviousClick() {
+        var current = Number(sessionStorage.getItem("currentPage"));
+        
+        $(current + "button").css("background-color", "white");
+        
+        //atualizar os numeros apenas se a pagina atual for >= 5
+        if(current % 5 == 0 && current >= 5){
+            var novaPaginacao = "";
+            for (var i = current-5+1; i < current+1; i++) {
+                console.log(i);
+                novaPaginacao += i + "-";
+            }
+            debugger;
+            sessionStorage.setItem("paginacao", novaPaginacao);
+        }
+        updateSession(-1);
+        window.location.reload(false);
+    }
+</script>
