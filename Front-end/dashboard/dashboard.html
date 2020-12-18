@@ -124,7 +124,7 @@
             contentType: "application/json",
             success: function (data) {
                 data.forEach(p => {
-                    stringPessoas+= `${p.nome};${p.dataCriada};${p.ocupacao};${p.status}\n`
+                    stringPessoas+= `${p.nome},${p.dataCriada},${p.ocupacao},${p.status}\n`
                 });
                 download("pessoas.csv", stringPessoas);
             },
