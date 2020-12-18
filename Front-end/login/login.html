@@ -99,9 +99,9 @@
                     if(p.nome == nomeInput && p.senha == senhaInput){
                         msg.textContent = "";
                         if (document.getElementById("rememberSession").checked) {
-                            localStorage.setItem("autentication", true);
+                            localStorage.setItem("autentication", p.nome);
                         } else {
-                            sessionStorage.setItem("autentication", true);
+                            sessionStorage.setItem("autentication", p.nome);
                         }
                         window.location.href = '/dashboard/dashboard.html';
                     }

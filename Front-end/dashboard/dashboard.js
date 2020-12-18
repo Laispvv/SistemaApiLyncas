@@ -1,7 +1,16 @@
-// inicialização de variáveis chaves
-var entriesAmount = 25;
-var currentEntrie = 5;
-var currentPage = 3;
+// inicialização de variáveis chaves - se existir informação a respeito no banco, usa elas
+var currentEntrie = 6; //sempre a mesma quantidade de entries
+
+var currentPage = 0; //muda com o click, porém se inicia em um
+
+if (sessionStorage.getItem("currentPage")) {
+    currentPage = sessionStorage.getItem("currentPage");
+} else {
+    currentPage = 0;
+    sessionStorage.setItem("currentPage", 0);
+}
+
+
 var baseUrl = "https://localhost:5001/api/pessoas/"
 
 var statusIconObj = function (obj) {
@@ -40,18 +49,13 @@ var createItemForObject = function (obj) {
     return html;
 }
 
-//permite string replacement por index
-String.prototype.replaceAt = function (index, replacement) {
-    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
-}
-
 // =================================================================================================================================================
 var verifyAutentication = function(){
     var autentication = localStorage.getItem('autentication');
     var autenticationSession = sessionStorage.getItem('autentication'); 
 
     //verificando se a pessoa ta logada para poder acessar o sistema:
-    if ((!autentication && !autenticationSession) || autentication == "false" ) {
+    if (!autentication && !autenticationSession) {
         window.location.href = '/login/login.html'; //se nao ta logado redireciona para a tela de login
         return false;
     }
@@ -65,15 +69,15 @@ var preencheDashboardPorApi = function(){
         dataType: "json",
         contentType: "application/json",
         success: function (data) {
-            listaPessoas = data;
+            sessionStorage.setItem("totalAmount", data.length);
+            inicial = parseInt(sessionStorage.getItem("currentPage"));
+
             var html = "<tr>";
-            data.forEach(p => {
-                //função que adiciona a pessoa na tela
-                html += createItemForObject(p);
-            });
-
+            //preenche a tabela com base nos index, mostrando sempre 6 por vez
+            for (var index = (inicial)*6; index < inicial + 6; index++) {
+                html += createItemForObject(data[index]);
+            }
             html += "</tr>";
-
             $("#tableBody").html(html);    
         },
         error: function (err) {
@@ -83,12 +87,18 @@ var preencheDashboardPorApi = function(){
     });
 }
 
+function pintaBotao(valor){
+    //pinta o botão da página atual de azul
+    var buttonPage = document.getElementById((currentPage - valor)% 5 + "button");
+    buttonPage.style = "color: white;background-color: #22bee6;";
+}
+
 window.addEventListener('DOMContentLoaded', function () {
-    
+
     verifyAutentication();   
     preencheDashboardPorApi();
-    
- }, false);
 
+    pintaBotao(0);
+ }, false);
 
 
