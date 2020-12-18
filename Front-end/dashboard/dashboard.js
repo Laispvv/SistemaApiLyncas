@@ -73,8 +73,8 @@ var preencheDashboardPorApi = function(){
             inicial = parseInt(sessionStorage.getItem("currentPage"));
 
             var html = "<tr>";
-            //preenche a tabela com base nos index, mostrando sempre 6 por vez
-            for (var index = (inicial)*6; index < inicial + 6; index++) {
+            //preenche a tabela com base nos index, mostrando sempre 6 por vez, e pega o menor entre mostrar 6 ou mostrar o que resta na tabela
+            for (var index = (inicial)*6; index < Math.min((inicial*6 + 6), data.length); index++) {
                 html += createItemForObject(data[index]);
             }
             html += "</tr>";
