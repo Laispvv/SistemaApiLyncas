@@ -126,7 +126,7 @@
                 data.forEach(p => {
                     stringPessoas+= `${p.nome};${p.dataCriada};${p.ocupacao};${p.status}\n`
                 });
-                download("pessoas.txt", stringPessoas);
+                download("pessoas.csv", stringPessoas);
             },
             error: function (err) {
                 console.log('error ' + err);
