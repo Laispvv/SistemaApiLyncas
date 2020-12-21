@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Lyncas.Api.Models;
 using Microsoft.AspNetCore.Cors;
+using LyncasApi.Models;
 
 namespace Lyncas.Api.Controllers
 {
-    //[EnableCors]
     [Route("api/[controller]")]
     [ApiController]
     public class PessoasController : ControllerBase
@@ -23,10 +23,13 @@ namespace Lyncas.Api.Controllers
         }
 
         // GET: api/Pessoas
+        //adicionando parametros ?nome=nome procura só por pessoas com determinado nome
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pessoa>>> GetPessoas()
+        public async Task<ActionResult<IEnumerable<Pessoa>>> GetPessoas([FromQuery] PessoaFiltro filtro)
         {
-            return await _context.Pessoas.ToListAsync();
+            return await _context.Pessoas
+                .Filtrar(filtro)
+                .ToListAsync();
         }
 
         // GET: api/Pessoas/5
