@@ -98,6 +98,15 @@ window.addEventListener('DOMContentLoaded', function () {
     verifyAutentication();   
     preencheDashboardPorApi();
 
+    var sAuth = sessionStorage.getItem("autentication");
+    var lAuth = localStorage.getItem("autentication");
+
+    if(sAuth != null){
+        $("#NomeDoUsuario").html("Olá, " + sAuth);
+    }else{
+        $("#NomeDoUsuario").html("Olá, " + lAuth);
+    }
+
     pintaBotao(0);
  }, false);
 
