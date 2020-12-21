@@ -57,11 +57,11 @@
             <div id="pageCounter">
                 <p></p>Showing <span class="boldWords" id="currentEntrie"></span> out of <span class="boldWords" id="totalAmount"></span> entries</p>
                 <button onclick=onNextClick()> Next </button>
-                <button class="5" id="4button"> <span id="4span"></span> </button>
-                <button class="4" id="3button"> <span id="3span"></span> </button>
-                <button class="3" id="2button"> <span id="2span"></span> </button>
-                <button class="2" id="1button"> <span id="1span"></span> </button>
-                <button class="1" id="0button"> <span id="0span"></span> </button>
+                <button class="4" id="4button" onclick=onPageButtonClick(this)> <span id="4span"></span> </button>
+                <button class="3" id="3button" onclick=onPageButtonClick(this)> <span id="3span"></span> </button>
+                <button class="2" id="2button" onclick=onPageButtonClick(this)> <span id="2span"></span> </button>
+                <button class="1" id="1button" onclick=onPageButtonClick(this)> <span id="1span"></span> </button>
+                <button class="0" id="0button" onclick=onPageButtonClick(this)> <span id="0span"></span> </button>
                 <button onclick=onPreviousClick()> Previous </button>
             </div>
         </div>
@@ -100,10 +100,15 @@
         $("#3span").text('4');
         $("#4span").text('5');
     }
-    
+    function onPageButtonClick(button){
+        var num = $("#"+button.id);
+        sessionStorage.setItem("currentPage", button.id[0]);
+        window.location.reload(false);
+    }
+
     var onCogButtonClick = function(botao){
         if (verifyAutentication()) {
-            window.location.href = '/form/form.html?id=' + botao.id;
+            window.location.href = '/form/form.html?id=' + botao.id; 
         }
     }
 
@@ -171,7 +176,6 @@
             }
             sessionStorage.setItem("paginacao", novaPaginacao);
         }
-        // debugger;
         window.location.reload(false);
     }
     
