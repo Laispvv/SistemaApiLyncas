@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Details</title>
+        <link rel="stylesheet" href="/Details/css/bootstrap.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=PT+Sans&family=Ubuntu:wght@300;500;700&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <div class="d-grid gap-3">
+            <div class="p-3 ">
+                <img style="width:400px;" id="fotoPessoa" src="https://www.flaticon.com/svg/static/icons/svg/21/21104.svg" class="rounded mx-auto d-block shadow-lg bg-white rounded" alt="">
+            </div>
+            <div class="p-3">
+                <ul class="list-group list-group-flush ">
+                    <li class="list-group-item text-center" >
+                        <h5 class="mb-2">Nome</h5>
+                        <p class="mb-1" id="nomePessoa">
+                        </p>
+                    </li>
+                    <li class="list-group-item text-center">
+                        <h5 class="mb-2">Ocupação</h5>
+                        <p class="mb-1" id="ocupacaoPessoa">
+                        </p>
+                    </li>
+                    <li class="list-group-item text-center">
+                        <h5 class="mb-2">Status</h5>
+                        <p class="mb-1" id="statusPessoa">
+                        </p>
+                    </li>
+                    <li class="list-group-item text-center">
+                        <h5 class="mb-2">Data Criada</h5>
+                        <p class="mb-1" id="dataPessoa">
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
+<script>
+
+    var procuraIdUrl = function () {
+        //procura na url o ID para dar um PUT
+        var urlParaProcura = window.location.search;
+        if (urlParaProcura == "") {
+            return 0;
+        }
+        let params = new URLSearchParams(urlParaProcura);
+        let idParaPut = params.get("id");
+
+        return idParaPut;
+    }
+
+    window.addEventListener('DOMContentLoaded', function () {
+         $.ajax({
+            url: "https://localhost:5001/api/pessoas/" + procuraIdUrl(),
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                console.log(data);
+                $("#fotoPessoa").attr("src", data.imagem);
+                $("#nomePessoa").html(data.nome);
+                $("#ocupacaoPessoa").html(data.ocupacao);
+                $("#statusPessoa").html(data.status);
+                dataCriada = data.dataCriada.split("-");
+                data = dataCriada[2] + "/" + dataCriada[1] + "/" + dataCriada[0];
+                $("#dataPessoa").html(data);
+            },
+            error: function (err) {
+                console.log('error ' + err);
+                return "";
+            }
+        });
+    }, false);
+
+</script>

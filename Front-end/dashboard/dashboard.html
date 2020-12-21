@@ -68,8 +68,7 @@
     </body>
 </html>
 
-<script>
-    $("#NomeDoUsuario").html("Olá, " + sessionStorage.getItem("autentication"))
+<script>   
     var onCancelButtonClick = function(botao){
         if(verifyAutentication()){
             $.ajax({
