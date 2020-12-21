@@ -1,7 +1,7 @@
 // inicialização de variáveis chaves - se existir informação a respeito no banco, usa elas
 var currentEntrie = 6; //sempre a mesma quantidade de entries
 
-var currentPage = 0; //muda com o click, porém se inicia em um
+var currentPage = 0; //muda com o click, porém se inicia em 0
 
 if (sessionStorage.getItem("currentPage")) {
     currentPage = sessionStorage.getItem("currentPage");
@@ -26,7 +26,7 @@ var statusIconObj = function (obj) {
 var createItemForObject = function (obj) {
     var idDoObj = obj.id;
     var html = 
-        `<tr id=${idDoObj}>
+        `<tr id=${idDoObj} onclick="window.location='/Details/details.html?id=${idDoObj}'";>
             <td> ${idDoObj} </td>
             <td> 
                 <img src=${obj.imagem} />
@@ -48,6 +48,12 @@ var createItemForObject = function (obj) {
         </tr>`;
     return html;
 }
+
+jQuery(document).ready(function ($) {
+    $(".clickable-row").click(function () {
+        window.location = $(this).data("href");
+    });
+});
 
 // =================================================================================================================================================
 var verifyAutentication = function(){
@@ -98,6 +104,7 @@ window.addEventListener('DOMContentLoaded', function () {
     verifyAutentication();   
     preencheDashboardPorApi();
 
+    //coloca o nome do usuário logado na tela inicial
     var sAuth = sessionStorage.getItem("autentication");
     var lAuth = localStorage.getItem("autentication");
 
