@@ -102,7 +102,7 @@
     }
     function onPageButtonClick(button){
         var num = $("#"+button.id);
-        sessionStorage.setItem("currentPage", button.id[0]);
+        sessionStorage.setItem("currentPage", button.children[0].innerText - 1);
         window.location.reload(false);
     }
 
@@ -191,7 +191,6 @@
                 console.log(i);
                 novaPaginacao += i + "-";
             }
-            debugger;
             sessionStorage.setItem("paginacao", novaPaginacao);
         }
         updateSession(-1);
