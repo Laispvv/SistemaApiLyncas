@@ -26,16 +26,19 @@ var statusIconObj = function (obj) {
 var createItemForObject = function (obj) {
     var idDoObj = obj.id;
     var html = 
-        `<tr id=${idDoObj} onclick="window.location='/Details/details.html?id=${idDoObj}'";>
-            <td> ${idDoObj} </td>
-            <td> 
+        `
+        <tr id=${idDoObj};>
+            <td onclick="window.location='/Details/details.html?id=${idDoObj}'"> 
+                ${idDoObj} 
+            </td>
+            <td onclick="window.location='/Details/details.html?id=${idDoObj}'"> 
                 <img src=${obj.imagem} />
                 <span>
                     ${obj.nome}
                 </span>
             </td>
-            <td> ${obj.dataCriada} </td>
-            <td> ${obj.ocupacao} </td>
+            <td onclick="window.location='/Details/details.html?id=${idDoObj}'"> ${obj.dataCriada} </td>
+            <td onclick="window.location='/Details/details.html?id=${idDoObj}'"> ${obj.ocupacao} </td>
             <td> ${statusIconObj(obj)} ${obj.status} </td>
             <td>
                 <button id="${idDoObj}"  onClick=onCogButtonClick(this) class="cogIcon ${idDoObj}">
@@ -45,7 +48,8 @@ var createItemForObject = function (obj) {
                     <i id="${idDoObj}" class="fa fa-times-circle ${idDoObj}" aria-hidden="true" style="color:#dd405a;"></i>
                 </button>
             </td>
-        </tr>`;
+        </tr>
+        `;
     return html;
 }
 
