@@ -11,7 +11,7 @@ if (sessionStorage.getItem("currentPage")) {
 }
 
 
-var baseUrl = "https://localhost:5001/api/pessoas";
+var baseUrl = "https://localhost:5001/api/pessoas/";
 
 var statusIconObj = function (obj) {
     if (obj.status == "Disponível") {
@@ -72,28 +72,31 @@ var verifyAutentication = function(){
     return true;
 }
 
+const fnDeErro = function (err) {
+    console.log('error ' + err);
+    return "";
+};
 var preencheDashboardPorApi = function(){
+    const fnDeSucesso = function (data) {
+        sessionStorage.setItem("totalAmount", data.length);
+        inicial = parseInt(sessionStorage.getItem("currentPage"));
+
+        var html = "<tr>";
+        //preenche a tabela com base nos index, mostrando sempre 6 por vez, e pega o menor entre mostrar 6 ou mostrar o que resta na tabela
+        for (var index = (inicial) * 6; index < Math.min((inicial * 6 + 6), data.length); index++) {
+            html += createItemForObject(data[index]);
+        }
+        html += "</tr>";
+        $("#tableBody").html(html);
+    };
+    
     $.ajax({
-        url: baseUrl + `?${sessionStorage.getItem("ordenar")}`,
+        url: baseUrl + `?${null}&${sessionStorage.getItem("ordenar")}`,
         method: "GET",
         dataType: "json",
         contentType: "application/json",
-        success: function (data) {
-            sessionStorage.setItem("totalAmount", data.length);
-            inicial = parseInt(sessionStorage.getItem("currentPage"));
-
-            var html = "<tr>";
-            //preenche a tabela com base nos index, mostrando sempre 6 por vez, e pega o menor entre mostrar 6 ou mostrar o que resta na tabela
-            for (var index = (inicial)*6; index < Math.min((inicial*6 + 6), data.length); index++) {
-                html += createItemForObject(data[index]);
-            }
-            html += "</tr>";
-            $("#tableBody").html(html);    
-        },
-        error: function (err) {
-            console.log('error ' + err);
-            return "";
-        }
+        success: fnDeSucesso,
+        error: fnDeErro
     });
 }
 
@@ -120,7 +123,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     pintaBotao(0);
  }, false);
-
+ 
  //função para fazer o download no export to excel!
 function download(filename, text) {
     var element = document.createElement('a');
