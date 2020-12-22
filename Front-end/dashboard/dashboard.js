@@ -11,7 +11,7 @@ if (sessionStorage.getItem("currentPage")) {
 }
 
 
-var baseUrl = "https://localhost:5001/api/pessoas/"
+var baseUrl = "https://localhost:5001/api/pessoas";
 
 var statusIconObj = function (obj) {
     if (obj.status == "Disponível") {
@@ -74,7 +74,7 @@ var verifyAutentication = function(){
 
 var preencheDashboardPorApi = function(){
     $.ajax({
-        url: baseUrl,
+        url: baseUrl + `?${sessionStorage.getItem("ordenar")}`,
         method: "GET",
         dataType: "json",
         contentType: "application/json",
@@ -135,3 +135,14 @@ function download(filename, text) {
     document.body.removeChild(element);
 }
 
+function sortByButton(item){
+    console.log(item);
+    var stringOrdenacao = `ordenarPor=${item}`;
+    //significa que já foi pedido pra ordenar na ordem crescente,
+    //então ordena na decrescente
+    if(sessionStorage.getItem("ordenar") == stringOrdenacao){
+        stringOrdenacao += ' desc';
+    }
+    sessionStorage.setItem("ordenar", stringOrdenacao);
+    window.location.reload(false);
+}

@@ -23,13 +23,12 @@ namespace Lyncas.Api.Controllers
         }
 
         // GET: api/Pessoas
-        //adicionando parametros ?nome=nome procura só por pessoas com determinado nome
-        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Pessoa>>> GetPessoas(
             [FromQuery] PessoaFiltro filtro,
             [FromQuery] PessoaOrdem ordem)
         {
+        //adicionando parametros ?nome=nome procura só por pessoas com determinado nome
             return await _context.Pessoas
                 .Filtrar(filtro)
                 .OrdenarPor(ordem)
