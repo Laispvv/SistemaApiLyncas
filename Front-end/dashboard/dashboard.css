@@ -127,7 +127,7 @@ body{
     margin-right: 0.5em;
 }
 
-.cogIcon, .cancelIcon{
+.cogIcon, .cancelIcon, .fa-sort{
     background-color: transparent;
     margin: 0;
     border: 0;
