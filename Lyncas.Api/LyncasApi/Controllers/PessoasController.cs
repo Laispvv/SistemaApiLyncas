@@ -24,13 +24,23 @@ namespace Lyncas.Api.Controllers
 
         // GET: api/Pessoas
         //adicionando parametros ?nome=nome procura só por pessoas com determinado nome
+        
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pessoa>>> GetPessoas([FromQuery] PessoaFiltro filtro)
+        public async Task<ActionResult<IEnumerable<Pessoa>>> GetPessoas(
+            [FromQuery] PessoaFiltro filtro,
+            [FromQuery] PessoaOrdem ordem)
         {
             return await _context.Pessoas
                 .Filtrar(filtro)
+                .OrdenarPor(ordem)
                 .ToListAsync();
         }
+
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Pessoa>>> GetPessoas()
+        //{
+        //    return await _context.Pessoas.ToListAsync();
+        //}
 
         // GET: api/Pessoas/5
         [HttpGet("{id}")]
@@ -42,7 +52,6 @@ namespace Lyncas.Api.Controllers
             {
                 return NotFound();
             }
-
             return pessoa;
         }
 
