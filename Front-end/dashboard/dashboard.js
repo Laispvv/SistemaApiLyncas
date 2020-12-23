@@ -1,15 +1,13 @@
 // inicialização de variáveis chaves - se existir informação a respeito no banco, usa elas
-var currentEntrie = 6; //sempre a mesma quantidade de entries
 
-var currentPage = 0; //muda com o click, porém se inicia em 0
+// if (sessionStorage.getItem("currentPage")) {
+//     currentPage = sessionStorage.getItem("currentPage");
+// } else {
+//     currentPage = 0;
+//     sessionStorage.setItem("currentPage", 0);
+// }
 
-if (sessionStorage.getItem("currentPage")) {
-    currentPage = sessionStorage.getItem("currentPage");
-} else {
-    currentPage = 0;
-    sessionStorage.setItem("currentPage", 0);
-}
-
+var total, numeroPagina, tamanhoPagina, currentPage;
 
 var baseUrl = "https://localhost:5001/api/pessoas/";
 
@@ -76,22 +74,31 @@ const fnDeErro = function (err) {
     console.log('error ' + err);
     return "";
 };
+
 var preencheDashboardPorApi = function(){
     const fnDeSucesso = function (data) {
-        sessionStorage.setItem("totalAmount", data.length);
-        inicial = parseInt(sessionStorage.getItem("currentPage"));
+        //inicialização das variáveis
+        total = data.total;
+        currentPage = data.numeroPagina;
+        currentEntrie = data.tamanhoPagina;
+        pessoas = data.resultado;
+        console.log(data);
 
         var html = "<tr>";
-        //preenche a tabela com base nos index, mostrando sempre 6 por vez, e pega o menor entre mostrar 6 ou mostrar o que resta na tabela
-        for (var index = (inicial) * 6; index < Math.min((inicial * 6 + 6), data.length); index++) {
-            html += createItemForObject(data[index]);
-        }
+        pessoas.forEach(element => {
+            html += createItemForObject(element);
+        });
         html += "</tr>";
         $("#tableBody").html(html);
+
+        var currentEntrieVar = $("#currentEntrie");
+        currentEntrieVar.html(currentEntrie);
+        var totalAmountVar = $("#totalAmount");
+        totalAmountVar.html(total);
     };
     
     $.ajax({
-        url: baseUrl + `?${null}&${sessionStorage.getItem("ordenar")}`,
+        url: baseUrl + `?${sessionStorage.getItem("ordenar")}&tamanho=6&pagina=${sessionStorage.getItem("currentPage")}`,
         method: "GET",
         dataType: "json",
         contentType: "application/json",
@@ -100,9 +107,10 @@ var preencheDashboardPorApi = function(){
     });
 }
 
-function pintaBotao(valor){
+
+function pintaBotao(){
     //pinta o botão da página atual de azul
-    var buttonPage = document.getElementById((currentPage - valor)% 5 + "button");
+    var buttonPage = document.getElementById((sessionStorage.getItem("currentPage") % 5) + "button");
     buttonPage.style = "color: white;background-color: #22bee6;";
 }
 
