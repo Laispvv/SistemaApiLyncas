@@ -69,11 +69,11 @@
             <div id="pageCounter">
                 <p></p>Showing <span class="boldWords" id="currentEntrie"></span> out of <span class="boldWords" id="totalAmount"></span> entries</p>
                 <button onclick=onNextClick()> Next </button>
-                <button class="4" id="4button" onclick=onPageButtonClick(this)> <span id="4span"></span> </button>
-                <button class="3" id="3button" onclick=onPageButtonClick(this)> <span id="3span"></span> </button>
-                <button class="2" id="2button" onclick=onPageButtonClick(this)> <span id="2span"></span> </button>
-                <button class="1" id="1button" onclick=onPageButtonClick(this)> <span id="1span"></span> </button>
-                <button class="0" id="0button" onclick=onPageButtonClick(this)> <span id="0span"></span> </button>
+                <button class="0" id="0button" onclick=onPageButtonClick(this)> <span id="4span"></span> </button>
+                <button class="4" id="4button" onclick=onPageButtonClick(this)> <span id="3span"></span> </button>
+                <button class="3" id="3button" onclick=onPageButtonClick(this)> <span id="2span"></span> </button>
+                <button class="2" id="2button" onclick=onPageButtonClick(this)> <span id="1span"></span> </button>
+                <button class="1" id="1button" onclick=onPageButtonClick(this)> <span id="0span"></span> </button>
                 <button onclick=onPreviousClick()> Previous </button>
             </div>
         </div>
@@ -113,7 +113,7 @@
     }
     function onPageButtonClick(button){
         var num = $("#"+button.id);
-        sessionStorage.setItem("currentPage", button.children[0].innerText - 1);
+        sessionStorage.setItem("currentPage", button.children[0].innerText);
         window.location.reload(false);
     }
 
@@ -157,28 +157,23 @@
         window.location.href = '/login/login.html';
     }
 
-    
-
     //mostra a quantidade certa de entries e showing baseado nas variáveis no dashboard.js
-    var currentEntrieVar = $("#currentEntrie");
-    currentEntrieVar.html(currentEntrie);
-    var totalAmountVar = $("#totalAmount");
-    totalAmountVar.html(sessionStorage.getItem("totalAmount"));
+   
+    
 
     function updateSession(num) {
         var atual = Number(sessionStorage.getItem("currentPage"));
         atual += num;
-        if(atual >= 0) sessionStorage.setItem("currentPage", atual);
+        if(atual > 0) sessionStorage.setItem("currentPage", atual);
     }
 
     function onNextClick() {
-        updateSession(1);
 
         var current = Number(sessionStorage.getItem("currentPage"));
-
         $(current + "button").css("background-color", "white");
+
+        updateSession(1);
         
-        var current = Number(sessionStorage.getItem("currentPage"));
         //atualizar os numeros apenas se a pagina atual for >= 5
         if(current%5 == 0 && current >= 5){
             var novaPaginacao = "";
@@ -195,6 +190,8 @@
         
         $(current + "button").css("background-color", "white");
         
+        updateSession(-1);
+        var current = Number(sessionStorage.getItem("currentPage"));
         //atualizar os numeros apenas se a pagina atual for >= 5
         if(current % 5 == 0 && current >= 5){
             var novaPaginacao = "";
@@ -204,7 +201,6 @@
             }
             sessionStorage.setItem("paginacao", novaPaginacao);
         }
-        updateSession(-1);
         window.location.reload(false);
     }
 </script>
