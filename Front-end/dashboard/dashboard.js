@@ -1,11 +1,11 @@
 // inicialização de variáveis chaves - se existir informação a respeito no banco, usa elas
 
-// if (sessionStorage.getItem("currentPage")) {
-//     currentPage = sessionStorage.getItem("currentPage");
-// } else {
-//     currentPage = 0;
-//     sessionStorage.setItem("currentPage", 0);
-// }
+if (sessionStorage.getItem("currentPage")) {
+    currentPage = sessionStorage.getItem("currentPage");
+} else {
+    currentPage = 1;
+    sessionStorage.setItem("currentPage", 1);
+}
 
 var total, numeroPagina, tamanhoPagina, currentPage;
 
